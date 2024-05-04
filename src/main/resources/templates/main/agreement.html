@@ -1,0 +1,33 @@
+
+<form id="form" th:action="@{/agreement}" th:method="POST">
+    <legend>Создание договора</legend>
+    <div class="form-group mb-3">
+        <label for="number" class="form-label">Номер договора:</label>
+        <input type="text" class="form-control" id="number" name="number">
+        <div id="numberHelp" class="form-text">Поле для ввода номера договора.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+<script>
+    $(function() {
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: $(this).serialize(),
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'json',
+                success: function(response) {
+                    alert("Договор с номером "+response.number+" успешно сохранен.");
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+</script>
