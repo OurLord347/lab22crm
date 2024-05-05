@@ -12,4 +12,5 @@ public interface AgreementRepository extends JpaRepository<Agreement, Long> {
 
     Optional<Agreement> findAgreementByNumber(String number);
     Agreement findById(UUID fromString);
+
 }

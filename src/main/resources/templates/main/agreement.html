@@ -9,6 +9,9 @@
 
     <button type="submit" class="btn btn-primary">Сохранить</button>
 </form>
+<div id="pagination">
+    <div th:replace="~{${pagination}}"></div>
+</div>
 <script>
     $(function() {
         $('#form').submit(function(e) {
@@ -29,5 +32,4 @@
             });
         });
     });
-
 </script>
