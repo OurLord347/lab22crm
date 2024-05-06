@@ -23,6 +23,8 @@ public class Product {
     @JsonIgnore
     private Invoice invoice;
 
+    private String name;
+
     public Product() {
 
     }

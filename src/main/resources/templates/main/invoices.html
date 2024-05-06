@@ -1,0 +1,37 @@
+
+<form id="form" th:action="@{/upload-invoice-excel}" th:method="POST">
+    <legend>Импорт накладной</legend>
+    <div class="form-group mb-3">
+        <label for="file" class="form-label">Накладная:</label>
+        <input type="file" class="form-control" id="file" name="file" acept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <div id="numberHelp" class="form-text">Поле для добавления импортируемой накладной.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+<div id="pagination">
+    <div th:replace="~{${pagination}}"></div>
+</div>
+<script>
+    $(function() {
+        $('#form').submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function(response) {
+                    alert("Накладная "+response.fileName+" успешно импортирована.");
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+</script>

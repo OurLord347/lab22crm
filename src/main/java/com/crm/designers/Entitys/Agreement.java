@@ -21,7 +21,7 @@ public class Agreement {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String number;
+    private Integer number;
 
     @ManyToOne
     @JoinColumn(name="user_info_id")

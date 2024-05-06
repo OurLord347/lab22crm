@@ -3,6 +3,8 @@ package com.crm.designers.Controllers;
 import com.crm.designers.Dto.PaginationDto;
 import com.crm.designers.Entitys.UserInfo;
 import com.crm.designers.Services.AgreementService;
+import com.crm.designers.Services.InvoiceService;
+import com.crm.designers.Services.ProductService;
 import com.crm.designers.Services.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class MainController {
 
     @Autowired
     UserInfoService userInfoService;
+
+    @Autowired
+    InvoiceService invoiceService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String main(Model model) {
@@ -61,9 +66,19 @@ public class MainController {
         return "pagination/designers";
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
-    public String products(Model model) {
-        model.addAttribute("chapter", "main/product");
+    @RequestMapping(value = "/invoices", method = RequestMethod.GET)
+    public String products(PaginationDto paginationDto, Model model) {
+        model.addAttribute("chapter", "main/invoices");
+        model.addAttribute("pagination", "pagination/invoices");
+        model.addAttribute("paginationPages", Math.ceil(userInfoService.getUserInfoCount()/10)+1);
+        model.addAttribute("paginationsData", invoiceService.getInvoices(paginationDto));
         return "main/index";
+    }
+
+    @RequestMapping(value = "/invoicesPagination", method = RequestMethod.GET)
+    public String productsPagination(PaginationDto paginationDto, Model model) {
+        model.addAttribute("paginationPages", Math.ceil(invoiceService.getInvoicesCount()/10)+1);
+        model.addAttribute("paginationsData", invoiceService.getInvoices(paginationDto));
+        return "pagination/invoices";
     }
 }
