@@ -1,19 +1,41 @@
-<form id="form" th:action="@{/userInfo}" th:method="POST">
-    <legend>Создание дизайнера</legend>
-    <div class="form-group mb-3">
-        <label for="name" class="form-label">Имя дизайнера:</label>
-        <input type="text" class="form-control" id="name" name="name">
-        <div id="nameHelp" class="form-text">Поле для ввода имени дизайнера.</div>
+<div class="container mt-1">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveModal">
+        Добавление дизайнера
+    </button>
+</div>
+
+<div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="saveModalLabel">Импорт накладной</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form id="form" th:action="@{/userInfo}" th:method="POST">
+                    <legend>Создание дизайнера</legend>
+                    <div class="form-group mb-3">
+                        <label for="name" class="form-label">Имя дизайнера:</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                        <div id="nameHelp" class="form-text">Поле для ввода имени дизайнера.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="agreement" class="form-label">Договор:</label>
+                        <select class="form-select" aria-label="Agreement" id="agreement" name="agreement" required>
+                            <option th:each="agreement : ${agreements}" th:value="${agreement.id}" th:text="${agreement.number}"></option>
+                        </select>
+                        <div id="agreementHelp" class="form-text">Выбор номера договора.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+
+            </div>
+        </div>
     </div>
-    <div class="form-group mb-3">
-        <label for="agreement" class="form-label">Договор:</label>
-        <select class="form-select" aria-label="Agreement" id="agreement" name="agreement" required>
-            <option th:each="agreement : ${agreements}" th:value="${agreement.id}" th:text="${agreement.number}"></option>
-        </select>
-        <div id="agreementHelp" class="form-text">Выбор номера договора.</div>
-    </div>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
-</form>
+</div>
+
 <div id="pagination">
     <div th:replace="~{${pagination}}"></div>
 </div>
@@ -29,6 +51,7 @@
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 success: function(response) {
+                    $('#saveModal').modal('hide');
                     alert("Дизайнер с именем "+response.name+" успешно сохранен.");
                 },
                 error: function(error) {

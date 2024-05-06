@@ -1,14 +1,34 @@
+<div class="container mt-1">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveModal">
+        Создание договора
+    </button>
+</div>
+<div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-<form id="form" th:action="@{/agreement}" th:method="POST">
-    <legend>Создание договора</legend>
-    <div class="form-group mb-3">
-        <label for="number" class="form-label">Номер договора:</label>
-        <input type="text" class="form-control" id="number" name="number">
-        <div id="numberHelp" class="form-text">Поле для ввода номера договора.</div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="saveModalLabel">Импорт накладной</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form id="form" th:action="@{/agreement}" th:method="POST">
+                    <legend>Создание договора</legend>
+                    <div class="form-group mb-3">
+                        <label for="number" class="form-label">Номер договора:</label>
+                        <input type="text" class="form-control" id="number" name="number">
+                        <div id="numberHelp" class="form-text">Поле для ввода номера договора.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+
+            </div>
+        </div>
     </div>
+</div>
 
-    <button type="submit" class="btn btn-primary">Сохранить</button>
-</form>
 <div id="pagination">
     <div th:replace="~{${pagination}}"></div>
 </div>
@@ -24,6 +44,7 @@
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 success: function(response) {
+                    $('#saveModal').modal('hide');
                     alert("Договор с номером "+response.number+" успешно сохранен.");
                 },
                 error: function(error) {
