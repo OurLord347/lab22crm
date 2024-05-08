@@ -8,6 +8,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,9 +40,9 @@ public class UserInfo {
     @JsonIgnoreProperties("userInfo")
     private List<Agreement> agreements;
 
-    @OneToMany(mappedBy="userInfo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="userInfo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("userInfo")
-    private List<ContactLink> contactLinks;
+    private List<ContactLink> contactLinks = new ArrayList<>();
 
     @OneToMany(mappedBy="userInfo", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("userInfo")

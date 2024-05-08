@@ -3,20 +3,13 @@ package com.crm.designers.Services;
 import com.crm.designers.Entitys.Agreement;
 import com.crm.designers.Entitys.Invoice;
 import com.crm.designers.Entitys.Product;
-import com.crm.designers.Repository.InvoiceRepository;
-import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 @Service

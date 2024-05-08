@@ -22,8 +22,54 @@
                         <div id="nameHelp" class="form-text">Поле для ввода имени дизайнера.</div>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="agreement" class="form-label">Договор:</label>
-                        <select class="form-select" aria-label="Agreement" id="agreement" name="agreement" required>
+                        <label for="surname" class="form-label">Фамилия дизайнера:</label>
+                        <input type="text" class="form-control" id="surname" name="surname">
+                        <div id="surnameHelp" class="form-text">Поле для ввода фамилии дизайнера.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="lastname" class="form-label">Отчество дизайнера:</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname">
+                        <div id="lastnameHelp" class="form-text">Поле для ввода отчества дизайнера.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="phone" class="form-label">Телефон дизайнера:</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+                        <div id="phoneHelp" class="form-text">Поле для ввода телефона дизайнера.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="address" class="form-label">Адрес дизайнера:</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Введите адрес">
+                        <div id="addressHelp" class="form-text">Поле для ввода адреса дизайнера.</div>
+                    </div>
+
+                    <div class="">
+                        <label for="contact_links" class="form-label">Соцсети:</label>
+                        <div id="contact_links" class="col-lg-12">
+                            <div id="row">
+                                <div class="input-group m-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-danger"
+                                                id="DeleteRow"
+                                                type="button">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control m-input" name="contactLinks[]" placeholder="Введите ссылку на соцсеть">
+                                </div>
+                            </div>
+
+                            <div id="newinput"></div>
+                            <button id="add-contact-link" type="button" class="btn btn-dark">
+                        <span class="bi bi-plus-square-dotted">
+                        </span> ADD
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="agreementId" class="form-label">Договор:</label>
+                        <select class="form-select" aria-label="Agreement" id="agreementId" name="agreementId" required>
                             <option th:each="agreement : ${agreements}" th:value="${agreement.id}" th:text="${agreement.number}"></option>
                         </select>
                         <div id="agreementHelp" class="form-text">Выбор номера договора.</div>
@@ -59,6 +105,20 @@
                 }
             });
         });
-    });
 
+        $("#add-contact-link").click(function () {
+            newRowAdd =
+                '<div id="row"> <div class="input-group m-3">' +
+                '<div class="input-group-prepend">' +
+                '<button class="btn btn-danger" id="DeleteRow" type="button">' +
+                '<i class="bi bi-trash"></i> Delete</button> </div>' +
+                '<input type="text" class="form-control m-input" name="contactLinks[]" placeholder="Введите ссылку на соцсеть"> </div> </div>';
+
+            $('#newinput').append(newRowAdd);
+        });
+        $("body").on("click", "#DeleteRow", function () {
+            $(this).parents("#row").remove();
+        })
+
+    });
 </script>

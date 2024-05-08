@@ -10,10 +10,10 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class FileService {
-    public boolean saveLocalFile(MultipartFile file, String fileName){
+    public boolean saveLocalFile(MultipartFile file, String fileName) {
 
         String projectDirectory = System.getProperty("user.dir");
-        Path filePath = Paths.get(projectDirectory,"src/main/resources/static/Invoices",fileName);
+        Path filePath = Paths.get(projectDirectory, "src/main/resources/static/Invoices", fileName);
         try {
             Files.createDirectories(filePath);
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);

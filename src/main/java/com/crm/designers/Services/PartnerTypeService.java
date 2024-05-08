@@ -18,32 +18,28 @@ public class PartnerTypeService {
     @Autowired
     private PartnerTypeRepository partnerTypeRepository;
 
-    public PartnerType createPartnerType(PartnerTypeDto agreementDto){
+    public PartnerType createPartnerType(PartnerTypeDto agreementDto) {
         PartnerType partnerType = PartnerType.builder()
                 .name(agreementDto.getName())
                 .build();
-        return save(partnerType);
-    }
-
-    public PartnerType save(PartnerType partnerType){
         return partnerTypeRepository.save(partnerType);
     }
 
-    public PartnerType getPartnerType(String uuid){
+    public PartnerType getPartnerType(String uuid) {
         return partnerTypeRepository.findById(UUID.fromString(uuid));
     }
 
-    public List<PartnerType> getPartnerTypes(){
+    public List<PartnerType> getPartnerTypes() {
         return partnerTypeRepository.findAll();
     }
 
-    public List<PartnerType> getPartnerTypes(PaginationDto paginationDto){
-        Pageable pageable = PageRequest.of(paginationDto.getPage(),paginationDto.getLimit());
+    public List<PartnerType> getPartnerTypes(PaginationDto paginationDto) {
+        Pageable pageable = PageRequest.of(paginationDto.getPage(), paginationDto.getLimit());
         Page<PartnerType> agreements = partnerTypeRepository.findAll(pageable);
         return agreements.getContent();
     }
 
-    public Long getCount(){
+    public Long getCount() {
         return partnerTypeRepository.count();
     }
 }

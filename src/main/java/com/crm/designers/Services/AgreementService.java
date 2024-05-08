@@ -5,19 +5,15 @@ import com.crm.designers.Dto.PaginationDto;
 import com.crm.designers.Entitys.Agreement;
 import com.crm.designers.Entitys.UserInfo;
 import com.crm.designers.Repository.AgreementRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -40,29 +36,31 @@ public class AgreementService {
         return agreementRepository.save(agreement);
     }
 
-    public List<Agreement> getAgreements(){
+    public List<Agreement> getAgreements() {
         return agreementRepository.findAll();
     }
-    public List<Agreement> getAgreements(PaginationDto paginationDto){
-        Pageable pageable = PageRequest.of(paginationDto.getPage(),paginationDto.getLimit());
+
+    public List<Agreement> getAgreements(PaginationDto paginationDto) {
+        Pageable pageable = PageRequest.of(paginationDto.getPage(), paginationDto.getLimit());
         Page<Agreement> agreements = agreementRepository.findAll(pageable);
         return agreements.getContent();
     }
-    public Agreement getAgreement(String uuid){
+
+    public Agreement getAgreement(String uuid) {
         return agreementRepository.findById(UUID.fromString(uuid));
     }
 
-    public Agreement getAgreementByNumber(Integer number){
+    public Agreement getAgreementByNumber(Integer number) {
         return agreementRepository.findAgreementByNumber(number).get();
     }
 
-    public Agreement setUserInfo(String AgreementUuid, UserInfo userInfo){
+    public Agreement setUserInfo(String AgreementUuid, UserInfo userInfo) {
         Agreement agreement = getAgreement(AgreementUuid);
         agreement.setUserInfo(userInfo);
         return agreementRepository.save(agreement);
     }
 
-    public Long getCount(){
+    public Long getCount() {
         return agreementRepository.count();
     }
 }
