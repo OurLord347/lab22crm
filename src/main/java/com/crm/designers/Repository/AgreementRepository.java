@@ -11,6 +11,6 @@ import java.util.UUID;
 public interface AgreementRepository extends JpaRepository<Agreement, Long> {
 
     Optional<Agreement> findAgreementByNumber(Integer number);
-    Agreement findById(UUID fromString);
+    Agreement findById(UUID uuid);
 
 }

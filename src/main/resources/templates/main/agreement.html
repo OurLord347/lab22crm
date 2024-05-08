@@ -20,7 +20,25 @@
                         <input type="text" class="form-control" id="number" name="number">
                         <div id="numberHelp" class="form-text">Поле для ввода номера договора.</div>
                     </div>
-
+                    <div class="form-group mb-3">
+                        <label for="date" class="form-label">Дата заключения договора:</label>
+                        <input type="date" class="form-control" id="date" name="date">
+                        <div id="dateHelp" class="form-text">Поле для ввода даты заключения договора.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="partnerTypeId" class="form-label">Тип сотрудничества:</label>
+                        <select class="form-select" aria-label="PartnerType" id="partnerTypeId" name="partnerTypeId" required>
+                            <option th:each="partnerType : ${partnerTypes}" th:value="${partnerType.id}" th:text="${partnerType.name}"></option>
+                        </select>
+                        <div id="partnerTypeHelp" class="form-text">Выбор типа сотрудничества.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="productTypeIds" class="form-label">Типы товаров:</label>
+                        <select class="form-select" aria-label="ProductType" id="productTypeIds" name="productTypeIds" multiple required>
+                            <option th:each="productType : ${productTypes}" th:value="${productType.id}" th:text="${productType.name}"></option>
+                        </select>
+                        <div id="productTypesHelp" class="form-text">Выбор типа товара.</div>
+                    </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
 

@@ -2,7 +2,6 @@ package com.crm.designers.Services;
 
 import com.crm.designers.Dto.PaginationDto;
 import com.crm.designers.Dto.PartnerTypeDto;
-import com.crm.designers.Entitys.Agreement;
 import com.crm.designers.Entitys.PartnerType;
 import com.crm.designers.Repository.PartnerTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PartnerTypeService {
@@ -27,6 +27,14 @@ public class PartnerTypeService {
 
     public PartnerType save(PartnerType partnerType){
         return partnerTypeRepository.save(partnerType);
+    }
+
+    public PartnerType getPartnerType(String uuid){
+        return partnerTypeRepository.findById(UUID.fromString(uuid));
+    }
+
+    public List<PartnerType> getPartnerTypes(){
+        return partnerTypeRepository.findAll();
     }
 
     public List<PartnerType> getPartnerTypes(PaginationDto paginationDto){

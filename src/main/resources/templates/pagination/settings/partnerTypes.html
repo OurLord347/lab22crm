@@ -34,7 +34,7 @@
 
     function updatePage(page) {
         $.ajax({
-            url: "settings/partnerTypesPagination",
+            url: "partnerTypesPagination",
             method: 'GET',
             data: { page: page, limit: 10 },
             success: function(data) {

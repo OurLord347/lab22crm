@@ -70,6 +70,8 @@ public class MainController {
     public String agreement(PaginationDto paginationDto, Model model) {
         model.addAttribute("chapter", "main/agreement");
         model.addAttribute("pagination", "pagination/agreement");
+        model.addAttribute("partnerTypes", partnerTypeService.getPartnerTypes());
+        model.addAttribute("productTypes", productTypeService.getProductTypes());
         model.addAttribute("paginationPages", Math.ceil(agreementService.getCount()/10)+1);
         model.addAttribute("paginationsData", agreementService.getAgreements(paginationDto));
         return "main/index";

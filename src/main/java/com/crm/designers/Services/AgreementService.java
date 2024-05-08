@@ -12,6 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,9 +24,18 @@ import java.util.UUID;
 public class AgreementService {
     @Autowired
     private AgreementRepository agreementRepository;
-    public Agreement createAgreement(AgreementDto agreementDto){
+    @Autowired
+    private PartnerTypeService partnerTypeService;
+    @Autowired
+    private ProductTypeService productTypeService;
+
+    public Agreement createAgreement(AgreementDto agreementDto) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Agreement agreement = Agreement.builder()
-                .number(Integer.valueOf(agreementDto.getNumber()))
+                .number(agreementDto.getNumber())
+                .partnerType(partnerTypeService.getPartnerType(agreementDto.getPartnerTypeId()))
+                .productTypes(productTypeService.getProductTypes(agreementDto.getProductTypeIds()))
+                .dateConclusion(formatter.parse(agreementDto.getDate()))
                 .build();
         return agreementRepository.save(agreement);
     }

@@ -10,6 +10,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public class Agreement {
     private UUID id;
 
     private Integer number;
+    private Date dateConclusion;
 
     @ManyToOne
     @JoinColumn(name="user_info_id")
@@ -33,6 +35,14 @@ public class Agreement {
     @OneToMany(mappedBy = "agreement", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("agreement")
     private List<Invoice> invoices;
+
+    @ManyToOne
+    @JoinColumn(name="partner_type_id")
+    @JsonIgnore
+    private PartnerType partnerType;
+
+    @ManyToMany
+    private List<ProductType> productTypes;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

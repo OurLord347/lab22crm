@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+
 @RestController
 public class AgreementController {
 
@@ -15,7 +17,7 @@ public class AgreementController {
     private AgreementService agreementService;
 
     @RequestMapping(value = "/agreement", method = RequestMethod.POST)
-    public Agreement post(AgreementDto agreementDto) {
+    public Agreement post(AgreementDto agreementDto) throws ParseException {
         return agreementService.createAgreement(agreementDto);
     }
 

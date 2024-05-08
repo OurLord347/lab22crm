@@ -3,6 +3,7 @@ package com.crm.designers.Services;
 import com.crm.designers.Dto.PaginationDto;
 import com.crm.designers.Dto.PartnerTypeDto;
 import com.crm.designers.Dto.ProductTypeDto;
+import com.crm.designers.Entitys.Agreement;
 import com.crm.designers.Entitys.PartnerType;
 import com.crm.designers.Entitys.ProductType;
 import com.crm.designers.Repository.PartnerTypeRepository;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductTypeService {
@@ -29,6 +31,14 @@ public class ProductTypeService {
 
     public ProductType save(ProductType productType){
         return productTypeRepository.save(productType);
+    }
+
+    public List<ProductType> getProductTypes(){
+        return productTypeRepository.findAll();
+    }
+
+    public List<ProductType> getProductTypes(Set<String> productTypeIds){
+        return productTypeRepository.findAllByIdIn(productTypeIds);
     }
 
     public List<ProductType> getProductTypes(PaginationDto paginationDto){

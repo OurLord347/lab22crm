@@ -25,10 +25,6 @@ public class Invoice {
     private UUID id;
 
     private String fileName;
-    private Date dateConclusion;
-
-    @OneToOne(mappedBy = "invoice")
-    private PartnerType partnerType;
 
     @ManyToOne
     @JoinColumn(name="agreement_id")
@@ -38,10 +34,6 @@ public class Invoice {
     @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("invoice")
     private List<Product> products;
-
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("invoice")
-    private List<ProductType> productTypes;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
