@@ -1,33 +1,26 @@
 <div class="container mt-1">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveModal">
-        Добавление дизайнера
+        Добавить тип товара
     </button>
 </div>
-
 <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="saveModalLabel">Добавление дизайнера</h5>
+                <h5 class="modal-title" id="saveModalLabel">Добавление типа товара</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-                <form id="form" th:action="@{/userInfo}" th:method="POST">
-                    <legend>Создание дизайнера</legend>
+                <form id="form" th:action="@{/productType}" th:method="POST">
+                    <legend>Создание тип товара</legend>
                     <div class="form-group mb-3">
-                        <label for="name" class="form-label">Имя дизайнера:</label>
+                        <label for="name" class="form-label">Наименование типа:</label>
                         <input type="text" class="form-control" id="name" name="name">
-                        <div id="nameHelp" class="form-text">Поле для ввода имени дизайнера.</div>
+                        <div id="numberHelp" class="form-text">Поле для ввода наименования типа.</div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="agreement" class="form-label">Договор:</label>
-                        <select class="form-select" aria-label="Agreement" id="agreement" name="agreement" required>
-                            <option th:each="agreement : ${agreements}" th:value="${agreement.id}" th:text="${agreement.number}"></option>
-                        </select>
-                        <div id="agreementHelp" class="form-text">Выбор номера договора.</div>
-                    </div>
+
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
 
@@ -52,7 +45,7 @@
                 dataType: 'json',
                 success: function(response) {
                     $('#saveModal').modal('hide');
-                    alert("Дизайнер с именем "+response.name+" успешно сохранен.");
+                    alert("Договор с номером "+response.name+" успешно сохранен.");
                 },
                 error: function(error) {
                     console.error(error);
@@ -60,5 +53,4 @@
             });
         });
     });
-
 </script>

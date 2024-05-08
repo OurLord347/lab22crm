@@ -1,6 +1,6 @@
 package com.crm.designers.Entitys;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,32 +8,29 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Data
 @Builder
 @AllArgsConstructor
-@Entity(name="users")
-public class User {
+@Entity(name = "contact_links")
+public class ContactLink {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "login", unique = true)
-    private String login;
+    private String link; //ссылка на соцсеть
 
-    @Column(name = "password")
-    private String password;
-
-    @OneToOne(mappedBy = "user")
+    @ManyToOne
+    @JoinColumn(name="user_info_id")
+    @JsonIgnore
     private UserInfo userInfo;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public User() {
+    public ContactLink() {
 
     }
 }

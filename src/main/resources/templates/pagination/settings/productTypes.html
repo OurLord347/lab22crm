@@ -1,0 +1,49 @@
+<div class="container mt-1">
+    <div class="container">
+        <h1>Типы товаров</h1>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li th:each="pageNumber : ${#numbers.sequence(1, paginationPages)}" class="page-item">
+                    <a class="page-link" th:href="@{'?page=' + ${pageNumber}}" th:text="${pageNumber}"></a>
+                </li>
+
+
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Contract Listing -->
+        <ul class="list-group">
+            <li class="list-group-item" th:each="paginationData : ${paginationsData}" th:text="${paginationData.name}"></li>
+        </ul>
+    </div>
+</div>
+<script>
+    $(function() {
+        $('.page-link').on('click', function(e) {
+            e.preventDefault();
+            const page = parseInt($(this).text());
+            updatePage(page-1);
+        });
+    });
+
+    function updatePage(page) {
+        $.ajax({
+            url: "settings/productTypesPagination",
+            method: 'GET',
+            data: { page: page, limit: 10 },
+            success: function(data) {
+                $('#pagination').html(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+</script>

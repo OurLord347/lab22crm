@@ -14,26 +14,25 @@ import java.util.UUID;
 @Data
 @Builder
 @AllArgsConstructor
-@Entity(name="users")
-public class User {
+@Entity(name = "passports")
+public class Passport {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "login", unique = true)
-    private String login;
+    private String serial; // серия
+    private String number; // номер
+    private String address; // прописка
 
-    @Column(name = "password")
-    private String password;
-
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "passport")
     private UserInfo userInfo;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public User() {
+    public Passport() {
 
     }
 }

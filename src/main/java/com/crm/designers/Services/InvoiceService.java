@@ -2,9 +2,7 @@ package com.crm.designers.Services;
 
 import com.crm.designers.Dto.PaginationDto;
 import com.crm.designers.Entitys.Invoice;
-import com.crm.designers.Entitys.UserInfo;
 import com.crm.designers.Repository.InvoiceRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -30,7 +28,7 @@ public class InvoiceService {
         return usersInfo.getContent();
     }
 
-    public Long getInvoicesCount(){
+    public Long getCount(){
         return invoiceRepository.count();
     }
 }

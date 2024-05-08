@@ -29,7 +29,7 @@ public class UserInfoService {
         agreementService.setUserInfo(userInfoDto.getAgreement(),userInfo);
         return userInfo;
     }
-    public Long getUserInfoCount(){
+    public Long getCount(){
         return userInfoRepository.count();
     }
 

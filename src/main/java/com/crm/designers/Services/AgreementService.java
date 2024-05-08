@@ -49,7 +49,7 @@ public class AgreementService {
         return agreementRepository.save(agreement);
     }
 
-    public Long getCountAgreement(){
+    public Long getCount(){
         return agreementRepository.count();
     }
 }
