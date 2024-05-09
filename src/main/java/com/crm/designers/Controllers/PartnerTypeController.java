@@ -7,9 +7,14 @@ import com.crm.designers.Entitys.PartnerType;
 import com.crm.designers.Services.AgreementService;
 import com.crm.designers.Services.PartnerTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 public class PartnerTypeController {
@@ -22,4 +27,10 @@ public class PartnerTypeController {
         return partnerTypeService.createPartnerType(partnerTypeDto);
     }
 
+    @Transactional
+    @RequestMapping(value="/partnerType/{id}", method=RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable UUID id){
+        partnerTypeService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

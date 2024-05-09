@@ -50,6 +50,14 @@ public class AgreementService {
         return agreementRepository.findById(UUID.fromString(uuid));
     }
 
+    public Agreement save(Agreement agreement) {
+        return agreementRepository.save(agreement);
+    }
+
+    public void delete(UUID uuid) {
+        agreementRepository.deleteById(uuid);
+    }
+
     public Agreement getAgreementByNumber(Integer number) {
         return agreementRepository.findAgreementByNumber(number).get();
     }

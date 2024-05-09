@@ -42,7 +42,7 @@ public class UserInfo {
 
     @OneToMany(mappedBy="userInfo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("userInfo")
-    private List<ContactLink> contactLinks = new ArrayList<>();
+    private List<ContactLink> contactLinks;
 
     @OneToMany(mappedBy="userInfo", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("userInfo")

@@ -22,4 +22,15 @@ public class FileService {
             return false;
         }
     }
+
+    public boolean deleteLocalFile(String fileName) {
+        try {
+            String projectDirectory = System.getProperty("user.dir");
+            Path filePath = Paths.get(projectDirectory, "src/main/resources/static/Invoices", fileName);
+            Files.deleteIfExists(filePath);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

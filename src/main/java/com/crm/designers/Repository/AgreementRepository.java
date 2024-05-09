@@ -13,4 +13,5 @@ public interface AgreementRepository extends JpaRepository<Agreement, Long> {
     Optional<Agreement> findAgreementByNumber(Integer number);
     Agreement findById(UUID uuid);
 
+    void deleteById(UUID uuid);
 }

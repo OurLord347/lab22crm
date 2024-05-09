@@ -11,12 +11,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
 public class InvoiceService {
     @Autowired
     private InvoiceRepository invoiceRepository;
+    @Autowired FileService fileService;
 
     public Invoice save(Invoice invoice) {
         return invoiceRepository.save(invoice);
@@ -30,5 +32,10 @@ public class InvoiceService {
 
     public Long getCount() {
         return invoiceRepository.count();
+    }
+
+    public void delete(UUID uuid) {
+        fileService.deleteLocalFile(uuid.toString());
+        invoiceRepository.deleteById(uuid);
     }
 }

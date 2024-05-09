@@ -31,7 +31,7 @@ public class Invoice {
     @JsonIgnore
     private Agreement agreement;
 
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnoreProperties("invoice")
     private List<Product> products;
 

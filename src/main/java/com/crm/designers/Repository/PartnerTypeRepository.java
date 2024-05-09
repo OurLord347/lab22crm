@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface PartnerTypeRepository extends JpaRepository<PartnerType, Long> {
     PartnerType findById(UUID uuid);
+    void deleteById(UUID uuid);
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class ProductTypeService {
@@ -42,5 +43,9 @@ public class ProductTypeService {
 
     public Long getCount() {
         return productTypeRepository.count();
+    }
+
+    public void delete(UUID uuid) {
+        productTypeRepository.deleteById(uuid);
     }
 }

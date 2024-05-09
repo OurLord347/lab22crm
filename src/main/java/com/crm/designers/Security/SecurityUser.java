@@ -30,7 +30,8 @@ public class SecurityUser implements UserDetails {
         return Arrays.asList(
                 () -> "read",
                 () -> "write",
-                () -> "post"
+                () -> "post",
+                () -> "delete"
         );
     }
 

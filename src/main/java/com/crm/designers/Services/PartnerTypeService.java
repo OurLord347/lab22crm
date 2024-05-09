@@ -42,4 +42,8 @@ public class PartnerTypeService {
     public Long getCount() {
         return partnerTypeRepository.count();
     }
+
+    public void delete(UUID uuid) {
+        partnerTypeRepository.deleteById(uuid);
+    }
 }

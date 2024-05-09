@@ -17,29 +17,29 @@
                 <form id="form" th:action="@{/userInfo}" th:method="POST">
                     <legend>Создание дизайнера</legend>
                     <div class="form-group mb-3">
-                        <label for="name" class="form-label">Имя дизайнера:</label>
+                        <label for="name" class="form-label">Имя:</label>
                         <input type="text" class="form-control" id="name" name="name">
-                        <div id="nameHelp" class="form-text">Поле для ввода имени дизайнера.</div>
+                        <div id="nameHelp" class="form-text">Поле для ввода имени.</div>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="surname" class="form-label">Фамилия дизайнера:</label>
+                        <label for="surname" class="form-label">Фамилия:</label>
                         <input type="text" class="form-control" id="surname" name="surname">
-                        <div id="surnameHelp" class="form-text">Поле для ввода фамилии дизайнера.</div>
+                        <div id="surnameHelp" class="form-text">Поле для ввода фамилии.</div>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="lastname" class="form-label">Отчество дизайнера:</label>
+                        <label for="lastname" class="form-label">Отчество:</label>
                         <input type="text" class="form-control" id="lastname" name="lastname">
-                        <div id="lastnameHelp" class="form-text">Поле для ввода отчества дизайнера.</div>
+                        <div id="lastnameHelp" class="form-text">Поле для ввода отчества.</div>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="phone" class="form-label">Телефон дизайнера:</label>
+                        <label for="phone" class="form-label">Телефон:</label>
                         <input type="text" class="form-control" id="phone" name="phone">
-                        <div id="phoneHelp" class="form-text">Поле для ввода телефона дизайнера.</div>
+                        <div id="phoneHelp" class="form-text">Поле для ввода телефона.</div>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="address" class="form-label">Адрес дизайнера:</label>
+                        <label for="address" class="form-label">Адрес:</label>
                         <input type="text" class="form-control" id="address" name="address" placeholder="Введите адрес">
-                        <div id="addressHelp" class="form-text">Поле для ввода адреса дизайнера.</div>
+                        <div id="addressHelp" class="form-text">Поле для ввода адреса.</div>
                     </div>
 
                     <div class="">
@@ -73,6 +73,18 @@
                             <option th:each="agreement : ${agreements}" th:value="${agreement.id}" th:text="${agreement.number}"></option>
                         </select>
                         <div id="agreementHelp" class="form-text">Выбор номера договора.</div>
+                    </div>
+                    <hr>
+                    <legend>Информация о бренде</legend>
+                    <div class="form-group mb-3">
+                        <label for="brand-name" class="form-label">Название бренда:</label>
+                        <input type="text" class="form-control" id="brand-name" name="brandDto.brandName">
+                        <div id="brand-nameHelp" class="form-text">Введите название бренда.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="brand-description" class="form-label">Описание бренда:</label>
+                        <textarea class="form-control" id="brand-description" name="brandDto.brandDescription" rows="3"></textarea>
+                        <div id="brand-descriptionHelp" class="form-text">Введите описание бренда.</div>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
