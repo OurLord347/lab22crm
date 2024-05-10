@@ -1,7 +1,9 @@
 package com.crm.designers.Services;
 
 import com.crm.designers.Dto.PaginationDto;
+import com.crm.designers.Dto.PartnerTypeDto;
 import com.crm.designers.Dto.ProductTypeDto;
+import com.crm.designers.Entitys.PartnerType;
 import com.crm.designers.Entitys.ProductType;
 import com.crm.designers.Repository.ProductTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,16 @@ import java.util.UUID;
 public class ProductTypeService {
     @Autowired
     private ProductTypeRepository productTypeRepository;
+
+    public ProductType updatePartnerType(ProductTypeDto agreementDto) {
+        ProductType partnerType = productTypeRepository.findById(UUID.fromString(agreementDto.getId()));
+        partnerType.setName(agreementDto.getName());
+        return productTypeRepository.save(partnerType);
+    }
+
+    public ProductType getPartnerType(UUID uuid) {
+        return productTypeRepository.findById(uuid);
+    }
 
     public ProductType createProductType(ProductTypeDto productTypeDto) {
         ProductType partnerType = ProductType.builder()

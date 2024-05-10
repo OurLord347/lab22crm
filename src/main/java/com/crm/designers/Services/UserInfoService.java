@@ -40,8 +40,30 @@ public class UserInfoService {
         return userInfo;
     }
 
+    public UserInfo updateUserInfo(UserInfoDto userInfoDto) {
+
+        UserInfo userInfo = getUsersInfo(UUID.fromString(userInfoDto.getId()));
+        userInfo.setName(userInfoDto.getName());
+        userInfo.setSurname(userInfoDto.getSurname());
+        userInfo.setLastname(userInfoDto.getLastname());
+        userInfo.setPhone(userInfoDto.getPhone());
+        userInfo = userInfoRepository.save(userInfo);
+        agreementService.setUserInfo(userInfoDto.getAgreementId(), userInfo);
+
+        //Todo сохранение ссылок
+//        contactLinksService.createContactLink(userInfoDto.getContactLinks(), userInfo);
+
+        userInfoDto.getBrandDto().setId(userInfo.getBrands().get(0).getId().toString());
+        brandService.updateBrand(userInfoDto.getBrandDto());
+        return userInfo;
+    }
+
     public Long getCount() {
         return userInfoRepository.count();
+    }
+
+    public UserInfo getUsersInfo(UUID uuid) {
+        return userInfoRepository.findById(uuid);
     }
 
     public List<UserInfo> getUsersInfo(PaginationDto paginationDto) {

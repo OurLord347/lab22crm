@@ -12,7 +12,7 @@ public class UserInfoDto {
     private String name; // Имя
     private String lastname; // Отчество
     private String phone; // телефон
-    private List<String> contactLinks = new ArrayList<>();
+    private List<String> contactLinks;
     private String agreementId; //id договора
 
     private BrandDto brandDto;

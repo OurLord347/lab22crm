@@ -1,7 +1,6 @@
 <div class="container mt-1">
     <div class="container">
         <h1>Типы товаров</h1>
-        <!-- Pagination -->
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item disabled">
@@ -10,20 +9,24 @@
                 <li th:each="pageNumber : ${#numbers.sequence(1, paginationPages)}" class="page-item">
                     <a class="page-link" th:href="@{'?page=' + ${pageNumber}}" th:text="${pageNumber}"></a>
                 </li>
-
-
                 <li class="page-item">
                     <a class="page-link" href="#">Next</a>
                 </li>
             </ul>
         </nav>
-        <!-- Contract Listing -->
         <ul class="list-group">
             <li class="list-group-item" th:each="paginationData : ${paginationsData}">
                 <div class="row">
-                    <div class="col-6 col-sm-11" th:text="${paginationData.name}"></div>
+                    <div class="col-6 col-sm-10" th:text="${paginationData.name}"></div>
                     <div class="col-6 col-sm-1">
-                        <form th:action="@{'/partnerType/' + ${paginationData.id}}">
+                        <form th:action="@{'/partnerType/' + ${paginationData.id}}" method="PUT">
+                            <button type="submit" class="btn btn-info p-1 btn-edit">
+                                <svg fill="#000000" width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z"/></svg>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-6 col-sm-1">
+                        <form th:action="@{'/partnerType/' + ${paginationData.id}}" method="DELETE">
                             <button type="submit" class="btn btn-danger p-1 btn-delete">
                                 <svg fill="#000000" width="25px" height="25px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <title>trash-line</title>
@@ -50,16 +53,28 @@
 
             let form = $(this).closest("form");
             let action = form.attr("action");
+            let method = form.attr("method");
 
             $.ajax({
                 url: action,
-                method: "DELETE",
+                method: method,
                 success: function(response) {
                     form.closest("li").remove();
                 },
                 error: function(error) {
                     alert("Произошла ошибка при удалении элемента.");
                 }
+            });
+        });
+        $('.btn-edit').click(function(e) {
+            e.preventDefault();
+            let form = $(this).closest("form");
+            let action = form.attr("action");
+            $.get(action, function(data) {
+                $('#form').attr('method', 'PUT');
+                $('#id').val(data.id);
+                $('#name').val(data.name);
+                $('#saveModal').modal('show');
             });
         });
     });

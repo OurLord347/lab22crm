@@ -1,7 +1,9 @@
 package com.crm.designers.Controllers;
 
 import com.crm.designers.Dto.AgreementDto;
+import com.crm.designers.Dto.PartnerTypeDto;
 import com.crm.designers.Entitys.Agreement;
+import com.crm.designers.Entitys.PartnerType;
 import com.crm.designers.Services.AgreementService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,16 @@ public class AgreementController {
 
     @Autowired
     private AgreementService agreementService;
+
+    @RequestMapping(value = "/agreement/{id}", method = RequestMethod.GET)
+    public Agreement get(@PathVariable UUID id) {
+        return agreementService.getAgreement(id);
+    }
+
+    @RequestMapping(value = "/agreement", method = RequestMethod.PUT)
+    public Agreement put(AgreementDto agreementDto) throws ParseException {
+        return agreementService.updatePartnerType(agreementDto);
+    }
 
     @RequestMapping(value = "/agreement", method = RequestMethod.POST)
     public Agreement post(AgreementDto agreementDto) throws ParseException {

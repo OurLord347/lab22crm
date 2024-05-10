@@ -23,7 +23,10 @@ public class ProductType {
 
     private String name; // название типа продукта
 
-    @ManyToMany(mappedBy = "productTypes")
+    @ManyToMany
+    @JoinTable(name = "agreement_product_types",
+            joinColumns = @JoinColumn(name = "product_type_id"),
+            inverseJoinColumns = @JoinColumn(name = "agreement_id"))
     @JsonIgnoreProperties("productTypes")
     private List<Agreement> agreements;
 

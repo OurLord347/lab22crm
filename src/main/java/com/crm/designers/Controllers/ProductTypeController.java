@@ -22,6 +22,16 @@ public class ProductTypeController {
     @Autowired
     private ProductTypeService productTypeService;
 
+    @RequestMapping(value = "/productType/{id}", method = RequestMethod.GET)
+    public ProductType get(@PathVariable UUID id) {
+        return productTypeService.getPartnerType(id);
+    }
+
+    @RequestMapping(value = "/productType", method = RequestMethod.PUT)
+    public ProductType put(ProductTypeDto productTypeDto) {
+        return productTypeService.updatePartnerType(productTypeDto);
+    }
+
     @RequestMapping(value = "/productType", method = RequestMethod.POST)
     public ProductType post(ProductTypeDto productTypeDto) {
         return productTypeService.createProductType(productTypeDto);
@@ -32,6 +42,6 @@ public class ProductTypeController {
     public ResponseEntity<Void> delete(@PathVariable UUID id){
         productTypeService.delete(id);
         return ResponseEntity.noContent().build();
-    }
+     }
 
 }

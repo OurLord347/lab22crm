@@ -33,12 +33,12 @@ public class Agreement {
     private UserInfo userInfo;
 
     @OneToMany(mappedBy = "agreement", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("agreement")
+    @JsonIgnore
     private List<Invoice> invoices;
 
     @ManyToOne
     @JoinColumn(name="partner_type_id")
-    @JsonIgnore
+    @JsonIgnoreProperties("agreement")
     private PartnerType partnerType;
 
     @ManyToMany

@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Data
 public class AgreementDto {
-
+    private String id;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private Integer number;
     private String date;

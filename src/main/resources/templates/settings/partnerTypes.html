@@ -1,5 +1,5 @@
 <div class="container mt-1">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveModal">
+    <button id="button_saveModal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveModal">
         Добавить тип сотрудничества
     </button>
 </div>
@@ -14,6 +14,7 @@
             <div class="modal-body">
 
                 <form id="form" th:action="@{/partnerType}" th:method="POST">
+                    <input type="hidden" name="id" id="id">
                     <legend>Создание типа сотрудничества</legend>
                     <div class="form-group mb-3">
                         <label for="name" class="form-label">Наименование типа:</label>
@@ -34,6 +35,9 @@
 </div>
 <script>
     $(function() {
+        $('#button_saveModal').click(function(e) {
+            $('#form').attr('method', 'POST');
+        });
         $('#form').submit(function(e) {
             e.preventDefault();
 

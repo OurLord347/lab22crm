@@ -22,6 +22,16 @@ public class PartnerTypeController {
     @Autowired
     private PartnerTypeService partnerTypeService;
 
+    @RequestMapping(value = "/partnerType/{id}", method = RequestMethod.GET)
+    public PartnerType get(@PathVariable UUID id) {
+        return partnerTypeService.getPartnerType(id);
+    }
+
+    @RequestMapping(value = "/partnerType", method = RequestMethod.PUT)
+    public PartnerType put(PartnerTypeDto partnerTypeDto) {
+        return partnerTypeService.updatePartnerType(partnerTypeDto);
+    }
+
     @RequestMapping(value = "/partnerType", method = RequestMethod.POST)
     public PartnerType post(PartnerTypeDto partnerTypeDto) {
         return partnerTypeService.createPartnerType(partnerTypeDto);

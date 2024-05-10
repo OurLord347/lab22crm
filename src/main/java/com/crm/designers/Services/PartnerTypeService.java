@@ -25,8 +25,17 @@ public class PartnerTypeService {
         return partnerTypeRepository.save(partnerType);
     }
 
+    public PartnerType updatePartnerType(PartnerTypeDto agreementDto) {
+        PartnerType partnerType = partnerTypeRepository.findById(UUID.fromString(agreementDto.getId()));
+        partnerType.setName(agreementDto.getName());
+        return partnerTypeRepository.save(partnerType);
+    }
+
     public PartnerType getPartnerType(String uuid) {
-        return partnerTypeRepository.findById(UUID.fromString(uuid));
+        return getPartnerType(UUID.fromString(uuid));
+    }
+    public PartnerType getPartnerType(UUID uuid) {
+        return partnerTypeRepository.findById(uuid);
     }
 
     public List<PartnerType> getPartnerTypes() {

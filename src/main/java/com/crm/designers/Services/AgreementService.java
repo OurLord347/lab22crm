@@ -36,6 +36,16 @@ public class AgreementService {
         return agreementRepository.save(agreement);
     }
 
+    public Agreement updatePartnerType(AgreementDto agreementDto) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Agreement agreement = getAgreement(agreementDto.getId());
+        agreement.setNumber(agreementDto.getNumber());
+        agreement.setPartnerType(partnerTypeService.getPartnerType(agreementDto.getPartnerTypeId()));
+        agreement.setProductTypes(productTypeService.getProductTypes(agreementDto.getProductTypeIds()));
+        agreement.setDateConclusion(formatter.parse(agreementDto.getDate()));
+        return agreementRepository.save(agreement);
+    }
+
     public List<Agreement> getAgreements() {
         return agreementRepository.findAll();
     }
@@ -47,7 +57,10 @@ public class AgreementService {
     }
 
     public Agreement getAgreement(String uuid) {
-        return agreementRepository.findById(UUID.fromString(uuid));
+        return getAgreement(UUID.fromString(uuid));
+    }
+    public Agreement getAgreement(UUID uuid) {
+        return agreementRepository.findById(uuid);
     }
 
     public Agreement save(Agreement agreement) {
