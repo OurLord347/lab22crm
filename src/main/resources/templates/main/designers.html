@@ -35,12 +35,6 @@
                         <input type="text" class="form-control" id="phone" name="phone">
                         <div id="phoneHelp" class="form-text">Поле для ввода телефона.</div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="address" class="form-label">Адрес:</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Введите адрес">
-                        <div id="addressHelp" class="form-text">Поле для ввода адреса.</div>
-                    </div>
-
                     <div class="">
                         <label for="contact_links" class="form-label">Соцсети:</label>
                         <div id="contact_links" class="col-lg-12">
@@ -61,6 +55,7 @@
                     </div>
                     <hr>
                     <legend>Информация о бренде</legend>
+                    <input type="hidden" name="brandDto.id" id="brand-id">
                     <div class="form-group mb-3">
                         <label for="brand-name" class="form-label">Название бренда:</label>
                         <input type="text" class="form-control" id="brand-name" name="brandDto.brandName">
@@ -110,19 +105,18 @@
             createLink("","");
         });
         $("body").on("click", "#DeleteRow", function () {
-            $(this).parents("#row").remove();
+            $(this).parents('.linkRows').remove();
         })
 
     });
     function createLink(contactLinkName, contactLinkId){
         countLinks = $(".contactLinks").length;
         newRowAdd =
-            '<div id="row"> <div class="input-group m-3">' +
+            '<div class="linkRows"> <div class="input-group m-3">' +
             '<div class="input-group-prepend">' +
             '<button class="btn btn-danger" id="DeleteRow" type="button">' +
             '<i class="bi bi-trash"></i> Delete</button> </div>' +
-            '<input type="hidden" name="contactLinks['+countLinks+'][id]" value="' + contactLinkId + '">'+
-            '<input type="text" class="form-control m-input contactLinks" name="contactLinks['+countLinks+'][link]" value="' + contactLinkName + '" placeholder="Введите ссылку на соцсеть"> </div> </div>';
+            '<input type="text" class="form-control m-input contactLinks" name="contactLinks[]" value="' + contactLinkName + '" placeholder="Введите ссылку на соцсеть"> </div> </div>';
         $('#newinput').append(newRowAdd);
     }
 </script>

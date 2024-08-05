@@ -5,6 +5,7 @@ import com.crm.designers.Dto.UserInfoDto;
 import com.crm.designers.Entitys.Agreement;
 import com.crm.designers.Entitys.UserInfo;
 import com.crm.designers.Services.UserInfoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,21 +23,25 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @Operation(summary = "Получение информации о дизайнере")
     @RequestMapping(value = "/userInfo/{id}", method = RequestMethod.GET)
     public UserInfo get(@PathVariable UUID id) {
         return userInfoService.getUsersInfo(id);
     }
 
+    @Operation(summary = "Редактирование информации о дизайнере")
     @RequestMapping(value = "/userInfo", method = RequestMethod.PUT)
     public UserInfo put(UserInfoDto agreementDto) {
         return userInfoService.updateUserInfo(agreementDto);
     }
 
+    @Operation(summary = "Создание дизайнера")
     @RequestMapping(value = "/userInfo", method = RequestMethod.POST)
     public UserInfo post(UserInfoDto userInfoDto) {
         return userInfoService.createUserInfo(userInfoDto);
     }
 
+    @Operation(summary = "Удаление дизайнера")
     @Transactional
     @RequestMapping(value = "/userInfo/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable UUID id) {

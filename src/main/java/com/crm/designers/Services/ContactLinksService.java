@@ -13,6 +13,22 @@ public class ContactLinksService {
     @Autowired
     private ContactLinkRepository contactLinkRepository;
 
+    public void updateContactLink(List<String> links, UserInfo userInfo) {
+        List<ContactLink> contactLinks = userInfo.getContactLinks();
+        contactLinks.forEach(ulink ->{
+            if(!links.contains(ulink.getLink())){
+                removeContactLink(ulink);
+            }
+        });
+        for (String link : links) {
+            if (!contactLinks.stream().anyMatch(l -> l.getLink().equals(link))) {
+                createContactLink(link, userInfo);
+            }
+        }
+    }
+    public void removeContactLink(ContactLink contactLink) {
+        contactLinkRepository.deleteById(contactLink.getId());
+    }
     public void createContactLink(List<String> links, UserInfo userInfo) {
         links.forEach(link -> createContactLink(link, userInfo));
     }

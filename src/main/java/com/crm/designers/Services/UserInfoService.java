@@ -5,6 +5,7 @@ import com.crm.designers.Dto.UserInfoDto;
 import com.crm.designers.Entitys.Agreement;
 import com.crm.designers.Entitys.UserInfo;
 import com.crm.designers.Repository.UserInfoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,8 +41,8 @@ public class UserInfoService {
         return userInfo;
     }
 
+    @Transactional
     public UserInfo updateUserInfo(UserInfoDto userInfoDto) {
-
         UserInfo userInfo = getUsersInfo(UUID.fromString(userInfoDto.getId()));
         userInfo.setName(userInfoDto.getName());
         userInfo.setSurname(userInfoDto.getSurname());
@@ -49,11 +50,7 @@ public class UserInfoService {
         userInfo.setPhone(userInfoDto.getPhone());
         userInfo = userInfoRepository.save(userInfo);
         agreementService.setUserInfo(userInfoDto.getAgreementId(), userInfo);
-
-        //Todo сохранение ссылок
-//        contactLinksService.createContactLink(userInfoDto.getContactLinks(), userInfo);
-
-        userInfoDto.getBrandDto().setId(userInfo.getBrands().get(0).getId().toString());
+        contactLinksService.updateContactLink(userInfoDto.getContactLinks(), userInfo);
         brandService.updateBrand(userInfoDto.getBrandDto());
         return userInfo;
     }

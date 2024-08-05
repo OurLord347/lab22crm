@@ -76,20 +76,15 @@
                 $('#name').val(data.name);
                 $('#lastname').val(data.lastname);
                 $('#phone').val(data.phone);
+                $('.linkRows').remove();
                 $.each(data.contactLinks, function(i, contactLink) {
-                    contactLink.id
-                    contactLink.link
+                    createLink(contactLink.link,contactLink.id);
                 });
-                // $('#number').val(data.number);
-                // let date = new Date(data.dateConclusion);
-                // let formattedDate = date.toISOString().split('T')[0];
-                // $('#date').val(formattedDate);
-                // $('#partnerTypeId').val(data.partnerType.id);
-                // let productTypeIds = [];
-                // data.productTypes.forEach(productType => {
-                //     productTypeIds.push(productType.id);
-                // });
-                // $('#productTypeIds').val(productTypeIds);
+                $.each(data.brands, function(i, brand) {
+                    $('#brand-id').val(brand.id);
+                    $('#brand-name').val(brand.name);
+                    $('#brand-description').val(brand.description);
+                });
                 $('#saveModal').modal('show');
             });
         });

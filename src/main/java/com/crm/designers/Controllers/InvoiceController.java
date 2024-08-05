@@ -3,6 +3,7 @@ package com.crm.designers.Controllers;
 import com.crm.designers.Services.AgreementService;
 import com.crm.designers.Services.ExcelService;
 import com.crm.designers.Services.InvoiceService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ public class InvoiceController {
     @Autowired
     InvoiceService invoiceService;
 
+    @Operation(summary = "Импорт EXEL накладной")
     @PostMapping("/upload-invoice-excel")
     public ResponseEntity<Map<String, String>> uploadProductExcel(@RequestParam("file") MultipartFile file) {
         excelService.saveProducts(file);
@@ -28,6 +30,7 @@ public class InvoiceController {
         return ResponseEntity.ok().body(response);
     }
 
+    @Operation(summary = "Удаление EXEL накладной")
     @Transactional
     @RequestMapping(value="/invoice/{id}", method=RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable UUID id){
